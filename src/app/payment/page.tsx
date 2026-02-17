@@ -1,14 +1,22 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Logo from '@/components/Logo';
-import { ShieldCheck, CreditCard, Lock, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, CreditCard, Lock, CheckCircle2, ChevronDown } from 'lucide-react';
+import { certificationLevels } from '@/data/arifac';
 
 export default function PaymentPage() {
     const router = useRouter();
+    const searchParams = useSearchParams();
+
+    // Get pre-selected course from URL params or default to L1
+    const preSelectedLevel = searchParams.get('level') || 'L1';
+    const preSelectedCourse = certificationLevels.find(c => c.level === preSelectedLevel) || certificationLevels[0];
+
+    const [selectedCourse, setSelectedCourse] = useState(preSelectedCourse);
     const [formData, setFormData] = useState({
         cardNumber: '',
         expiry: '',
@@ -21,6 +29,11 @@ export default function PaymentPage() {
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleCourseChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const course = certificationLevels.find(c => c.level === e.target.value);
+        if (course) setSelectedCourse(course);
     };
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -43,6 +56,14 @@ export default function PaymentPage() {
         }, 2000);
     };
 
+    const formatPrice = (price: number) => {
+        return new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: 'INR',
+            minimumFractionDigits: 2
+        }).format(price);
+    };
+
     return (
         <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
             <div className="bg-white rounded-2xl shadow-xl max-w-4xl w-full flex flex-col md:flex-row overflow-hidden border border-gray-100">
@@ -56,15 +77,15 @@ export default function PaymentPage() {
                         <div className="space-y-4">
                             <div className="flex justify-between items-start pb-4 border-b border-white/10">
                                 <div>
-                                    <h3 className="font-semibold">L1 Certification</h3>
-                                    <p className="text-xs text-gray-400">Foundations of Financial Integrity</p>
+                                    <h3 className="font-semibold">{selectedCourse.level} Certification</h3>
+                                    <p className="text-xs text-gray-400">{selectedCourse.title}</p>
                                 </div>
-                                <span className="font-mono">₹5,000.00</span>
+                                <span className="font-mono">{formatPrice(selectedCourse.price)}</span>
                             </div>
 
                             <div className="flex justify-between items-center text-sm text-gray-400">
                                 <span>Subtotal</span>
-                                <span>₹5,000.00</span>
+                                <span>{formatPrice(selectedCourse.price)}</span>
                             </div>
                             <div className="flex justify-between items-center text-sm text-gray-400">
                                 <span>Tax (18% GST)</span>
@@ -76,7 +97,7 @@ export default function PaymentPage() {
                     <div className="mt-8 pt-4 border-t border-white/10">
                         <div className="flex justify-between items-center mb-1">
                             <span className="text-lg font-bold">Total Due</span>
-                            <span className="text-2xl font-bold text-accent">₹5,000.00</span>
+                            <span className="text-2xl font-bold text-accent">{formatPrice(selectedCourse.price)}</span>
                         </div>
                         <div className="flex items-center gap-2 text-xs text-green-400 mt-4 bg-green-400/10 p-2 rounded w-fit">
                             <ShieldCheck className="w-3 h-3" />
@@ -100,6 +121,26 @@ export default function PaymentPage() {
                     )}
 
                     <form onSubmit={handleSubmit} className="space-y-6">
+                        {/* Course Selection */}
+                        <div>
+                            <label className="text-xs font-semibold uppercase text-gray-500 mb-1 block">Select Certification Course</label>
+                            <div className="relative">
+                                <select
+                                    value={selectedCourse.level}
+                                    onChange={handleCourseChange}
+                                    className="w-full bg-gray-50 border border-gray-200 rounded-lg py-3 px-4 pr-10 text-primary focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all appearance-none cursor-pointer"
+                                >
+                                    {certificationLevels.map((course) => (
+                                        <option key={course.level} value={course.level}>
+                                            {course.level} - {course.title} ({formatPrice(course.price)})
+                                        </option>
+                                    ))}
+                                </select>
+                                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
+                            </div>
+                            <p className="text-xs text-gray-500 mt-2">{selectedCourse.targetAudience}</p>
+                        </div>
+
                         <div className="space-y-4">
                             <div>
                                 <label className="text-xs font-semibold uppercase text-gray-500 mb-1 block">Cardholder Name</label>
@@ -172,7 +213,7 @@ export default function PaymentPage() {
                                     Processing Payment...
                                 </>
                             ) : (
-                                'Pay ₹5,000.00 & Access Course'
+                                `Pay ${formatPrice(selectedCourse.price)} & Access Course`
                             )}
                         </button>
                     </form>

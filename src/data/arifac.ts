@@ -1,4 +1,5 @@
 import { LucideIcon, Shield, FileText, Users, Globe, BookOpen, Award, Building2, Landmark, GraduationCap, Scale, Briefcase } from 'lucide-react';
+import { lmsCourseData, Module } from './lms';
 
 export interface Section {
     id: string;
@@ -14,6 +15,8 @@ export interface CertificationLevel {
     features: string[];
     validity: string;
     isProctored: boolean;
+    price: number;              // Price in INR
+    syllabus?: Module[];
 }
 
 export interface MembershipCategory {
@@ -87,7 +90,9 @@ export const certificationLevels: CertificationLevel[] = [
             "Ethical compliance standards"
         ],
         validity: "Lifetime",
-        isProctored: false
+        isProctored: false,
+        price: 5000,
+        syllabus: lmsCourseData
     },
     {
         level: "L2",
@@ -100,7 +105,32 @@ export const certificationLevels: CertificationLevel[] = [
             "Risk assessment methodologies"
         ],
         validity: "3 Years",
-        isProctored: true
+        isProctored: true,
+        price: 10000,
+        syllabus: [
+            {
+                id: 1,
+                title: "Advanced KYC/CDD",
+                description: "Deep dive into customer due diligence for complex entities.",
+                duration: "2 hours",
+                lessons: [
+                    { id: "1.1", title: "Beneficial Ownership Identification", duration: "40:00", content: "Techniques for unraveling complex corporate structures." },
+                    { id: "1.2", title: "Enhanced Due Diligence (EDD) for High Risk", duration: "40:00", content: "Protocols for PEPs and high-risk jurisdictions." },
+                    { id: "1.3", title: "Ongoing Monitoring Requirements", duration: "40:00", content: "Dynamic risk profiling and review cycles." }
+                ]
+            },
+            {
+                id: 2,
+                title: "Transaction Monitoring & STR",
+                description: "Operationalizing alert management and reporting.",
+                duration: "2.5 hours",
+                lessons: [
+                    { id: "2.1", title: "Red Flag Typologies", duration: "45:00", content: "Common and emerging alert scenarios across sectors." },
+                    { id: "2.2", title: "Alert Investigation Workflow", duration: "45:00", content: "From alert triggers to investigation closure." },
+                    { id: "2.3", title: "Filing Quality STRs/SARs", duration: "60:00", content: "Narrative writing and FIU reporting standards." }
+                ]
+            }
+        ]
     },
     {
         level: "L3",
@@ -113,7 +143,32 @@ export const certificationLevels: CertificationLevel[] = [
             "Crypto-asset compliance"
         ],
         validity: "3 Years",
-        isProctored: true
+        isProctored: true,
+        price: 15000,
+        syllabus: [
+            {
+                id: 1,
+                title: "Sanctions & TBML",
+                description: "Advanced screening and trade compliance.",
+                duration: "3 hours",
+                lessons: [
+                    { id: "1.1", title: "Sanctions List Management", duration: "60:00", content: "Calibration, fuzzy matching, and false positive reduction." },
+                    { id: "1.2", title: "Trade Based Money Laundering (TBML)", duration: "60:00", content: "Under-invoicing, over-invoicing, and ghost shipping." },
+                    { id: "1.3", title: "Dual-Use Goods & Proliferation Fin", duration: "60:00", content: "Tracking strategic trade and export controls." }
+                ]
+            },
+            {
+                id: 2,
+                title: "Digital Assets & Investigations",
+                description: "Crypto compliance and forensic techniques.",
+                duration: "3 hours",
+                lessons: [
+                    { id: "2.1", title: "VDA Risk & Compliance", duration: "60:00", content: "Travel rule implementation and wallet screening." },
+                    { id: "2.2", title: "On-chain Investigation Basics", duration: "60:00", content: "Blockchain forensic tools and tracing methodologies." },
+                    { id: "2.3", title: "Advanced Investigative Interviewing", duration: "60:00", content: "Psychology of fraud and elicitation techniques." }
+                ]
+            }
+        ]
     },
     {
         level: "L4",
@@ -126,7 +181,32 @@ export const certificationLevels: CertificationLevel[] = [
             "Cross-border regulatory frameworks"
         ],
         validity: "5 Years",
-        isProctored: true
+        isProctored: true,
+        price: 20000,  // L4 Executive level pricing
+        syllabus: [
+            {
+                id: 1,
+                title: "Strategic Compliance Management",
+                description: "Building a culture of integrity at the board level.",
+                duration: "4 hours",
+                lessons: [
+                    { id: "1.1", title: "Board Reporting & Governance", duration: "60:00", content: "Communicating residual risk to non-executive directors." },
+                    { id: "1.2", title: "Regulatory Diplomacy", duration: "60:00", content: "Managing inspections and constructive engagement." },
+                    { id: "1.3", title: "Ethics & Compliance Culture", duration: "120:00", content: "Tone from the top and whistleblower management." }
+                ]
+            },
+            {
+                id: 2,
+                title: "Global Standards & Future Trends",
+                description: "Navigating the international regulatory landscape.",
+                duration: "4 hours",
+                lessons: [
+                    { id: "2.1", title: "FATF Recommendations & Mutual Eval", duration: "60:00", content: "Understanding national and institutional impact." },
+                    { id: "2.2", title: "AI/ML in Compliance Governance", duration: "120:00", content: "Governing algorithmic decision-making." },
+                    { id: "2.3", title: "ESG & Financial Crime Linkage", duration: "60:00", content: "Environmental crime and social governance risks." }
+                ]
+            }
+        ]
     }
 ];
 
