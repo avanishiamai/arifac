@@ -8,12 +8,12 @@ import Image from 'next/image';
 const galleryCategories = ["All", "Events", "Training", "Community", "Awards"];
 
 const galleryImages = [
-    { id: 1, title: "Annual Meet 2025", category: "Events", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80" },
-    { id: 2, title: "Training Session L2", category: "Training", image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80" },
-    { id: 3, title: "Volunteer Recognition", category: "Community", image: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800&q=80" },
-    { id: 4, title: "Excellence Awards", category: "Awards", image: "https://images.unsplash.com/photo-1531050171651-61afc2836520?w=800&q=80" },
-    { id: 5, title: "Board Gathering", category: "Events", image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&q=80" },
-    { id: 6, title: "Nodal Officer Workshop", category: "Training", image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&q=80" },
+    { id: 1, title: "ARIFAC Third National Meeting", category: "Events", image: "/images/img1.png" },
+    { id: 2, title: "ARIFAC Third National Meeting", category: "Training", image: "/images/img2.png" },
+    { id: 3, title: "ARIFAC Second National Meeting", category: "Community", image: "/images/img3.jpg" },
+    { id: 4, title: "ARIFAC Second National Meeting", category: "Awards", image: "/images/img4.jpg" },
+    { id: 5, title: "ARIFAC First National Meeting", category: "Events", image: "/images/img5.jpg" },
+    { id: 6, title: "Visit of the Indian Delegation to Vienna", category: "Training", image: "/images/img6.jpg" },
 ];
 
 export default function GalleryPage() {

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import Logo from './Logo';
@@ -20,8 +21,6 @@ export default function Navbar() {
     }, []);
 
     const navLinks = [
-        { name: 'About', href: '/#about' },
-        { name: 'Certification', href: '/#certification' },
         { name: 'Meetings', href: '/meetings' },
         { name: 'Gallery', href: '/gallery' },
         { name: 'Members', href: '/members' },
@@ -39,193 +38,247 @@ export default function Navbar() {
     const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
     return (
-        <nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${isScrolled
-                ? 'bg-white/90 backdrop-blur-xl border-gray-200 py-3 shadow-sm'
-                : 'bg-transparent border-transparent py-5'
-                }`}
-        >
-            <div className="container mx-auto px-6 flex items-center justify-between">
-                <Link href="/" className="group">
-                    <Logo />
-                </Link>
-
-                {/* Desktop Navigation */}
-                <div className="hidden lg:flex items-center gap-6">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.name}
-                            href={link.href}
-                            className="text-xs font-bold text-gray-600 hover:text-primary transition-colors duration-200 uppercase tracking-wide"
-                        >
-                            {link.name}
-                        </Link>
-                    ))}
-
-                    {/* Team Dropdown */}
-                    <div
-                        className="relative"
-                        onMouseEnter={() => setIsTeamOpen(true)}
-                        onMouseLeave={() => setIsTeamOpen(false)}
+        <>
+            {/* IAMAI Partnership Top Bar */}
+            <motion.div
+                initial={{ y: 0 }}
+                animate={{ y: isScrolled ? -40 : 0 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className="fixed top-0 left-0 right-0 z-[60] h-10 bg-gray-900 border-b border-white/5 flex items-center justify-center px-4"
+            >
+                <div className="flex items-center gap-3">
+                    <span className="text-gray-400 text-[11px] uppercase tracking-widest font-medium hidden sm:block">
+                        Operating under the aegis of
+                    </span>
+                    <a
+                        href="https://iamai.in"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 group"
                     >
-                        <button className="text-xs font-bold text-gray-600 hover:text-primary transition-colors duration-200 uppercase tracking-wide flex items-center gap-1">
-                            Our Team <ChevronDown size={14} className={`transition-transform duration-200 ${isTeamOpen ? 'rotate-180' : ''}`} />
-                        </button>
-
-                        <AnimatePresence>
-                            {isTeamOpen && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: 10 }}
-                                    className="absolute top-full left-0 mt-2 w-64 bg-white border border-gray-100 rounded-xl shadow-xl overflow-hidden"
-                                >
-                                    <div className="py-2">
-                                        {teamLinks.map((link) => (
-                                            <Link
-                                                key={link.name}
-                                                href={link.href}
-                                                className="block px-4 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50 transition-colors"
-                                            >
-                                                {link.name}
-                                            </Link>
-                                        ))}
-                                    </div>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                    </div>
+                        <div className="relative w-14 h-5 rounded overflow-hidden bg-white">
+                            <Image
+                                src="/iamai-logo.png"
+                                alt="IAMAI"
+                                fill
+                                className="object-contain p-0.5"
+                            />
+                        </div>
+                        <span className="text-white/60 group-hover:text-white text-[11px] font-medium transition-colors hidden md:block">
+                            Internet &amp; Mobile Association of India
+                        </span>
+                    </a>
                 </div>
+            </motion.div>
 
-                {/* Desktop Action Buttons */}
-                <div className="hidden lg:flex items-center gap-4">
-                    {getUser() ? (
-                        <>
-                            <Link
-                                href="/lms/dashboard"
-                                className="text-sm font-semibold text-primary hover:text-accent transition-colors px-4 py-2 border border-gray-200 rounded-md hover:border-primary hover:bg-gray-50 flex items-center gap-2"
-                            >
-                                Dashboard
-                            </Link>
-                            <button
-                                onClick={() => {
-                                    logout();
-                                    window.location.href = '/';
-                                }}
-                                className="text-sm font-semibold text-red-500 hover:text-red-700 transition-colors px-4 py-2 border border-red-100 rounded-md hover:border-red-500 hover:bg-red-50"
-                            >
-                                Logout
-                            </button>
-                        </>
-                    ) : (
-                        <>
-                            <Link
-                                href="/login"
-                                className="text-sm font-semibold text-primary hover:text-accent transition-colors px-4 py-2 border border-gray-200 rounded-md hover:border-primary hover:bg-gray-50"
-                            >
-                                Login to LMS
-                            </Link>
-                            <Link
-                                href="/join"
-                                className="text-sm font-semibold text-white bg-primary hover:bg-gray-800 transition-all px-5 py-2 rounded-md shadow-lg hover:shadow-xl"
-                            >
-                                Become a Member
-                            </Link>
-                        </>
-                    )}
-                </div>
+            <nav
+                className={`fixed left-0 right-0 z-50 transition-all duration-500 border-b ${isScrolled
+                    ? 'top-0 bg-white/95 backdrop-blur-2xl border-gray-200/80 py-4 shadow-md'
+                    : 'top-10 bg-transparent border-transparent py-6'
+                    }`}
+            >
+                <div className="container mx-auto px-6 flex items-center justify-between">
+                    <Link href="/" className="group">
+                        <Logo />
+                    </Link>
 
-                {/* Mobile Menu Button */}
-                <button
-                    className="lg:hidden p-2 text-gray-600 hover:text-primary transition-colors"
-                    onClick={toggleMobileMenu}
-                    aria-label="Toggle menu"
-                >
-                    {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
-            </div>
-
-            {/* Mobile Navigation Drawer */}
-            <AnimatePresence>
-                {isMobileMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3, ease: 'easeInOut' }}
-                        className="lg:hidden bg-white border-t border-gray-100 overflow-hidden"
-                    >
-                        <div className="container mx-auto px-6 py-8 flex flex-col gap-6">
-                            {navLinks.map((link) => (
+                    {/* Desktop Navigation */}
+                    <div className="hidden lg:flex items-center">
+                        {navLinks.map((link, index) => (
+                            <div key={link.name} className="flex items-center">
                                 <Link
-                                    key={link.name}
                                     href={link.href}
-                                    className="text-lg font-medium text-gray-700 hover:text-primary transition-colors"
-                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="relative group px-4 py-1 text-sm font-semibold text-gray-600 hover:text-primary transition-colors duration-200 uppercase tracking-widest"
                                 >
                                     {link.name}
+                                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-0 bg-primary rounded-full transition-all duration-300 group-hover:w-4/5" />
                                 </Link>
-                            ))}
+                                {/* Separator */}
+                                <span className="w-px h-4 bg-gray-300/70 mx-1" />
+                            </div>
+                        ))}
 
-                            <div className="flex flex-col gap-3">
-                                <div className="text-xs font-bold text-gray-400 uppercase tracking-widest pl-1">Our Team</div>
-                                {teamLinks.map((link) => (
+                        {/* Team Dropdown */}
+                        <div
+                            className="relative flex items-center"
+                            onMouseEnter={() => setIsTeamOpen(true)}
+                            onMouseLeave={() => setIsTeamOpen(false)}
+                        >
+                            <button className="relative group px-4 py-1 text-sm font-semibold text-gray-600 hover:text-primary transition-colors duration-200 uppercase tracking-widest flex items-center gap-1.5">
+                                Our Team
+                                <ChevronDown size={14} className={`mt-0.5 transition-transform duration-300 ${isTeamOpen ? 'rotate-180 text-primary' : ''}`} />
+                                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-0 bg-primary rounded-full transition-all duration-300 group-hover:w-4/5" />
+                            </button>
+
+                            <AnimatePresence>
+                                {isTeamOpen && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                                        exit={{ opacity: 0, y: 8, scale: 0.97 }}
+                                        transition={{ duration: 0.18, ease: 'easeOut' }}
+                                        className="absolute top-full left-0 mt-3 w-68 bg-white border border-gray-100 rounded-2xl shadow-2xl overflow-hidden"
+                                    >
+                                        <div className="p-2">
+                                            {teamLinks.map((link) => (
+                                                <Link
+                                                    key={link.name}
+                                                    href={link.href}
+                                                    className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-600 hover:text-primary hover:bg-gray-50 rounded-xl transition-all duration-150 group"
+                                                >
+                                                    <span className="w-1 h-4 rounded-full bg-gray-200 group-hover:bg-primary transition-colors duration-200" />
+                                                    {link.name}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
+                    </div>
+
+                    {/* Desktop Action Buttons */}
+                    <div className="hidden lg:flex items-center gap-3">
+                        {/* Vertical divider separating nav from actions */}
+                        <span className="w-px h-6 bg-gray-200 mr-1" />
+
+                        {getUser() ? (
+                            <>
+                                <Link
+                                    href="/lms/dashboard"
+                                    className="text-sm font-semibold text-primary hover:text-accent transition-colors px-4 py-2 border border-gray-200 rounded-lg hover:border-primary hover:bg-gray-50 flex items-center gap-2"
+                                >
+                                    Dashboard
+                                </Link>
+                                <button
+                                    onClick={() => {
+                                        logout();
+                                        window.location.href = '/';
+                                    }}
+                                    className="text-sm font-semibold text-red-500 hover:text-red-700 transition-colors px-4 py-2 border border-red-100 rounded-lg hover:border-red-300 hover:bg-red-50"
+                                >
+                                    Logout
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                {/* Old internal login link — replaced with external LMS */}
+                                {/* <Link
+                                href="/login"
+                                className="text-sm font-semibold text-gray-700 hover:text-primary transition-colors px-4 py-2 rounded-lg hover:bg-gray-100"
+                            >
+                                Learning Platform
+                            </Link> */}
+                                <a
+                                    href="https://iamai.edmingle.com/courses"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-sm font-semibold text-gray-700 hover:text-primary transition-colors px-4 py-2 rounded-lg hover:bg-gray-100"
+                                >
+                                    Learning Platform
+                                </a>
+                                <Link
+                                    href="/join"
+                                    className="text-sm font-semibold text-white bg-primary hover:bg-gray-900 transition-all px-5 py-2.5 rounded-lg shadow-md hover:shadow-lg ring-1 ring-primary/20 hover:ring-primary/40 tracking-wide"
+                                >
+                                    Become a Member
+                                </Link>
+                            </>
+                        )}
+                    </div>
+
+                    {/* Mobile Menu Button */}
+                    <button
+                        className="lg:hidden p-2 text-gray-600 hover:text-primary transition-colors"
+                        onClick={toggleMobileMenu}
+                        aria-label="Toggle menu"
+                    >
+                        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                    </button>
+                </div>
+
+                {/* Mobile Navigation Drawer */}
+                <AnimatePresence>
+                    {isMobileMenuOpen && (
+                        <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.3, ease: 'easeInOut' }}
+                            className="lg:hidden bg-white border-t border-gray-100 overflow-hidden"
+                        >
+                            <div className="container mx-auto px-6 py-8 flex flex-col gap-6">
+                                {navLinks.map((link) => (
                                     <Link
                                         key={link.name}
                                         href={link.href}
-                                        className="text-lg font-medium text-gray-700 hover:text-primary transition-colors pl-4 border-l-2 border-gray-100"
+                                        className="text-lg font-medium text-gray-700 hover:text-primary transition-colors"
                                         onClick={() => setIsMobileMenuOpen(false)}
                                     >
                                         {link.name}
                                     </Link>
                                 ))}
-                            </div>
 
-                            <div className="h-px bg-gray-100 w-full" />
-                            <div className="flex flex-col gap-4">
-                                {getUser() ? (
-                                    <>
+                                <div className="flex flex-col gap-3">
+                                    <div className="text-xs font-bold text-gray-400 uppercase tracking-widest pl-1">Our Team</div>
+                                    {teamLinks.map((link) => (
                                         <Link
-                                            href="/lms/dashboard"
-                                            className="text-center font-semibold text-primary px-4 py-3 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors"
+                                            key={link.name}
+                                            href={link.href}
+                                            className="text-lg font-medium text-gray-700 hover:text-primary transition-colors pl-4 border-l-2 border-gray-100"
                                             onClick={() => setIsMobileMenuOpen(false)}
                                         >
-                                            Dashboard
+                                            {link.name}
                                         </Link>
-                                        <button
-                                            onClick={() => {
-                                                logout();
-                                                setIsMobileMenuOpen(false);
-                                                window.location.href = '/';
-                                            }}
-                                            className="text-center font-semibold text-red-500 px-4 py-3 border border-red-100 rounded-md hover:bg-red-50 transition-colors"
-                                        >
-                                            Logout
-                                        </button>
-                                    </>
-                                ) : (
-                                    <>
-                                        <Link
-                                            href="/login"
-                                            className="text-center font-semibold text-primary px-4 py-3 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors"
-                                            onClick={() => setIsMobileMenuOpen(false)}
-                                        >
-                                            Login to LMS
-                                        </Link>
-                                        <Link
-                                            href="/join"
-                                            className="text-center font-semibold text-white bg-primary px-5 py-3 rounded-md shadow-lg"
-                                            onClick={() => setIsMobileMenuOpen(false)}
-                                        >
-                                            Become a Member
-                                        </Link>
-                                    </>
-                                )}
+                                    ))}
+                                </div>
+
+                                <div className="h-px bg-gray-100 w-full" />
+                                <div className="flex flex-col gap-4">
+                                    {getUser() ? (
+                                        <>
+                                            <Link
+                                                href="/lms/dashboard"
+                                                className="text-center font-semibold text-primary px-4 py-3 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors"
+                                                onClick={() => setIsMobileMenuOpen(false)}
+                                            >
+                                                Dashboard
+                                            </Link>
+                                            <button
+                                                onClick={() => {
+                                                    logout();
+                                                    setIsMobileMenuOpen(false);
+                                                    window.location.href = '/';
+                                                }}
+                                                className="text-center font-semibold text-red-500 px-4 py-3 border border-red-100 rounded-md hover:bg-red-50 transition-colors"
+                                            >
+                                                Logout
+                                            </button>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Link
+                                                href="/login"
+                                                className="text-center font-semibold text-primary px-4 py-3 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors"
+                                                onClick={() => setIsMobileMenuOpen(false)}
+                                            >
+                                                Learning Platform
+                                            </Link>
+                                            <Link
+                                                href="/join"
+                                                className="text-center font-semibold text-white bg-primary px-5 py-3 rounded-md shadow-lg"
+                                                onClick={() => setIsMobileMenuOpen(false)}
+                                            >
+                                                Become a Member
+                                            </Link>
+                                        </>
+                                    )}
+                                </div>
                             </div>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </nav>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </nav>
+        </>
     );
 }

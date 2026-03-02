@@ -19,11 +19,9 @@ export default function Home() {
 
       <div className="relative z-10 bg-background">
         <MissionSection />
-        <AboutSection />
         <LatestMeetingsSection />
         <CertificationScrollSection />
         <MembershipSection />
-        <QuickGallerySection />
         <EngagementSection />
         <PartnersSection />
         <ResourcesSection />

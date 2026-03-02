@@ -20,7 +20,7 @@ export default function SyllabusModal({ course, onClose }: SyllabusModalProps) {
 
     return (
         <AnimatePresence>
-            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6">
+            <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 pt-20 md:p-6 md:pt-24">
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -95,32 +95,6 @@ export default function SyllabusModal({ course, onClose }: SyllabusModalProps) {
                             Close
                         </button>
 
-                        {isPaid ? (
-                            <button
-                                onClick={() => {
-                                    router.push('/lms/dashboard');
-                                    onClose();
-                                }}
-                                className="px-6 py-2 rounded-lg text-sm font-semibold text-white bg-primary hover:bg-gray-800 transition-all shadow-lg flex items-center gap-2"
-                            >
-                                <PlayCircle size={18} />
-                                Go to Course
-                            </button>
-                        ) : (
-                            <button
-                                onClick={() => {
-                                    if (isLoggedIn()) {
-                                        router.push(`/payment?level=${course.level}`);
-                                    } else {
-                                        router.push('/login');
-                                    }
-                                    onClose();
-                                }}
-                                className="px-6 py-2 rounded-lg text-sm font-semibold text-white bg-primary hover:bg-gray-800 transition-all shadow-lg"
-                            >
-                                Enroll Now - ₹{course.price.toLocaleString('en-IN')}
-                            </button>
-                        )}
                     </div>
                 </motion.div>
             </div>

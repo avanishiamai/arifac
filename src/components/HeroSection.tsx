@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, ChevronDown, FileText, Users, Building2 } from 'lucide-react';
 import { useRef } from 'react';
@@ -59,20 +60,42 @@ export default function HeroSection() {
                     style={{ opacity, scale, y }}
                     className="flex flex-col items-center gap-8 max-w-5xl mx-auto"
                 >
+                    <br />
                     {/* Animated Badge */}
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gray-50 border border-gray-200 shadow-sm backdrop-blur-md"
+                        className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-gray-50 border border-gray-200 shadow-sm backdrop-blur-md"
                     >
                         <span className="relative flex h-2.5 w-2.5">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent"></span>
                         </span>
+
                         <span className="text-xs font-bold tracking-widest uppercase text-gray-600">
-                            India's National Compliance Platform
+                            India's National AML/CFT Compliance Platform
                         </span>
+
+                        {/* Separator + IAMAI tag */}
+                        {/* <span className="w-px h-4 bg-gray-300/70" />
+                        <a
+                            href="https://iamai.in"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1.5 group"
+                            title="Internet And Mobile Association of India"
+                        >
+                            <span className="text-[10px] text-gray-400 font-medium group-hover:text-gray-600 transition-colors hidden sm:block">by</span>
+                            <div className="relative w-10 h-4 rounded overflow-hidden bg-white border border-gray-100">
+                                <Image
+                                    src="/iamai-logo.png"
+                                    alt="IAMAI"
+                                    fill
+                                    className="object-contain p-0.5"
+                                />
+                            </div>
+                        </a> */}
                     </motion.div>
 
                     {/* Main Heading with Gradient and Stagger */}
@@ -80,13 +103,15 @@ export default function HeroSection() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.4 }}
-                        className="text-6xl md:text-7xl lg:text-8xl font-bold font-heading leading-[1.05] tracking-tight text-primary"
+                        className="text-3xl md:text-4xl lg:text-5xl font-bold font-heading leading-[1.05] tracking-tight text-primary"
                     >
+
                         Advancing India’s <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-gray-600 to-primary animate-gradient-x bg-[length:200%_auto]">
-                            Financial Integrity
-                        </span> <br />
+                            Financial Integrity &nbsp;
+                        </span>
                         Architecture
+                        <br />
                     </motion.h1>
 
                     <motion.div

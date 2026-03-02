@@ -87,7 +87,7 @@ export default function MeetingsPage() {
                                 </div>
                                 <div className="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end">
                                     <button className="text-sm font-bold text-primary hover:text-accent transition-colors">
-                                        {meeting.status === 'Upcoming' ? 'Register Seat' : 'View Minutes'} →
+                                        {meeting.status === 'Upcoming' ? 'Register Seat' : meeting.status === 'Planned' ? 'View Agenda' : 'View Minutes'} →
                                     </button>
                                 </div>
                             </motion.div>
