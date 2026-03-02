@@ -75,28 +75,25 @@ export default function Footer() {
                 {/* IAMAI Technology Partner Strip */}
                 <div className="mb-10 p-6 rounded-2xl border border-white/8 bg-white/4 backdrop-blur-sm flex flex-col sm:flex-row items-center gap-6 justify-between">
                     <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-3">
-                            <span className="text-[10px] text-gray-500 uppercase tracking-[0.2em] font-semibold whitespace-nowrap">Operating under the aegis of</span>
-                            <span className="w-px h-5 bg-white/10" />
-                        </div>
+
                         <a
                             href="https://iamai.in"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group flex items-center gap-3 hover:opacity-80 transition-opacity"
+                            className="group flex items-center gap-4 hover:opacity-80 transition-opacity"
                             title="Internet And Mobile Association of India"
                         >
-                            <div className="relative w-24 h-9 bg-white rounded-lg overflow-hidden shadow-sm p-1">
+                            <div className="relative w-40 h-22 bg-white rounded-xl overflow-hidden shadow-md p-1.5 transition-transform group-hover:scale-105">
                                 <Image
                                     src="/iamai-logo.png"
                                     alt="IAMAI - Internet And Mobile Association of India"
                                     fill
-                                    className="object-contain p-0.5"
+                                    className="object-contain p-1"
                                 />
                             </div>
                             <div className="hidden md:flex flex-col">
-                                <span className="text-white text-sm font-semibold leading-tight">IAMAI</span>
-                                <span className="text-gray-500 text-[10px]">Internet &amp; Mobile Association of India</span>
+                                <span className="text-gray-400 text-[15px] font-medium">Operating under the aegis of</span>
+                                <span className="text-gray-400 text-[15px] font-medium">Internet &amp; Mobile Association of India</span>
                             </div>
                         </a>
                     </div>

@@ -21,13 +21,14 @@ export default function Navbar() {
     }, []);
 
     const navLinks = [
+        { name: 'Home', href: '/' },
         { name: 'Meetings', href: '/meetings' },
         { name: 'Gallery', href: '/gallery' },
         { name: 'Members', href: '/members' },
     ];
 
     const teamLinks = [
-        { name: 'Sectoral Nodal Officers', href: '/sectoral-nodal-officers' },
+
         { name: 'Training Leads', href: '/training-leads' },
         { name: 'Training Volunteers', href: '/training-volunteers' },
         { name: 'Training Topic Request', href: '/training-topics' },
@@ -105,7 +106,7 @@ export default function Navbar() {
                             onMouseLeave={() => setIsTeamOpen(false)}
                         >
                             <button className="relative group px-4 py-1 text-sm font-semibold text-gray-600 hover:text-primary transition-colors duration-200 flex items-center gap-1.5">
-                                Our Team
+                                Training
                                 <ChevronDown size={14} className={`mt-0.5 transition-transform duration-300 ${isTeamOpen ? 'rotate-180 text-primary' : ''}`} />
                                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-0 bg-primary rounded-full transition-all duration-300 group-hover:w-4/5" />
                             </button>
@@ -181,7 +182,13 @@ export default function Navbar() {
                                     href="/join"
                                     className="text-sm font-semibold text-primary hover:text-accent transition-all px-4 py-2 border border-gray-200 rounded-lg hover:border-primary hover:bg-gray-50 tracking-wide"
                                 >
-                                    Become a Member
+                                    Member Platform
+                                </Link>
+                                <Link
+                                    href="/"
+                                    className="text-sm font-semibold text-gray-700 hover:text-primary transition-all px-4 py-2 border border-gray-200 rounded-lg hover:border-primary hover:bg-gray-50"
+                                >
+                                    Arifac Team Login
                                 </Link>
                             </>
                         )}
@@ -220,7 +227,7 @@ export default function Navbar() {
                                 ))}
 
                                 <div className="flex flex-col gap-3">
-                                    <div className="text-xs font-bold text-gray-400 uppercase tracking-widest pl-1">Our Team</div>
+                                    <div className="text-xs font-bold text-gray-400 uppercase tracking-widest pl-1">Training</div>
                                     {teamLinks.map((link) => (
                                         <Link
                                             key={link.name}
@@ -269,7 +276,14 @@ export default function Navbar() {
                                                 className="text-center font-semibold text-white bg-primary px-5 py-3 rounded-md shadow-lg"
                                                 onClick={() => setIsMobileMenuOpen(false)}
                                             >
-                                                Become a Member
+                                                Member Platform
+                                            </Link>
+                                            <Link
+                                                href=""
+                                                className="text-center font-semibold text-primary px-4 py-3 border border-gray-200 rounded-md hover:bg-gray-50 transition-colors"
+
+                                            >
+                                                Arifac Team Login
                                             </Link>
                                         </>
                                     )}
