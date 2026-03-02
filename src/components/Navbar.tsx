@@ -88,7 +88,7 @@ export default function Navbar() {
                             <div key={link.name} className="flex items-center">
                                 <Link
                                     href={link.href}
-                                    className="relative group px-4 py-1 text-sm font-semibold text-gray-600 hover:text-primary transition-colors duration-200 uppercase tracking-widest"
+                                    className="relative group px-4 py-1 text-sm font-semibold text-gray-600 hover:text-primary transition-colors duration-200"
                                 >
                                     {link.name}
                                     <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-0 bg-primary rounded-full transition-all duration-300 group-hover:w-4/5" />
@@ -104,7 +104,7 @@ export default function Navbar() {
                             onMouseEnter={() => setIsTeamOpen(true)}
                             onMouseLeave={() => setIsTeamOpen(false)}
                         >
-                            <button className="relative group px-4 py-1 text-sm font-semibold text-gray-600 hover:text-primary transition-colors duration-200 uppercase tracking-widest flex items-center gap-1.5">
+                            <button className="relative group px-4 py-1 text-sm font-semibold text-gray-600 hover:text-primary transition-colors duration-200 flex items-center gap-1.5">
                                 Our Team
                                 <ChevronDown size={14} className={`mt-0.5 transition-transform duration-300 ${isTeamOpen ? 'rotate-180 text-primary' : ''}`} />
                                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-0 bg-primary rounded-full transition-all duration-300 group-hover:w-4/5" />
@@ -173,13 +173,13 @@ export default function Navbar() {
                                     href="https://iamai.edmingle.com/courses"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-sm font-semibold text-gray-700 hover:text-primary transition-colors px-4 py-2 rounded-lg hover:bg-gray-100"
+                                    className="text-sm font-semibold text-gray-700 hover:text-primary transition-all px-4 py-2 border border-gray-200 rounded-lg hover:border-primary hover:bg-gray-50"
                                 >
                                     Learning Platform
                                 </a>
                                 <Link
                                     href="/join"
-                                    className="text-sm font-semibold text-white bg-primary hover:bg-gray-900 transition-all px-5 py-2.5 rounded-lg shadow-md hover:shadow-lg ring-1 ring-primary/20 hover:ring-primary/40 tracking-wide"
+                                    className="text-sm font-semibold text-primary hover:text-accent transition-all px-4 py-2 border border-gray-200 rounded-lg hover:border-primary hover:bg-gray-50 tracking-wide"
                                 >
                                     Become a Member
                                 </Link>

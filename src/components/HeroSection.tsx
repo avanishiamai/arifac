@@ -132,14 +132,13 @@ export default function HeroSection() {
                     >
                         <Link
                             href="#certification"
-                            className="group inline-flex items-center justify-center gap-3 bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-900 transition-all shadow-[0_10px_20px_rgba(0,0,0,0.1)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)] hover:-translate-y-1"
+                            className="group inline-flex items-center justify-center gap-2 bg-white border border-gray-200 text-primary min-w-[220px] px-8 py-4 rounded-xl font-bold text-base hover:border-primary hover:bg-gray-50 transition-all shadow-sm hover:shadow-md hover:-translate-y-1"
                         >
                             Explore Certification
-                            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </Link>
                         <Link
                             href="/join"
-                            className="group inline-flex items-center justify-center gap-3 bg-white border border-gray-200 text-primary px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-50 hover:border-gray-300 transition-all shadow-sm hover:shadow-md hover:-translate-y-1"
+                            className="group inline-flex items-center justify-center gap-2 bg-white border border-gray-200 text-primary min-w-[220px] px-8 py-4 rounded-xl font-bold text-base hover:border-primary hover:bg-gray-50 transition-all shadow-sm hover:shadow-md hover:-translate-y-1"
                         >
                             Become a Member
                         </Link>
